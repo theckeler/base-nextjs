@@ -4,10 +4,9 @@ import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }) {
 
-
-  const response = await axios({
+  const page = await axios({
     url: 'http://base.localhost:8080/graphql',
     method: 'post',
     headers: {
@@ -16,7 +15,7 @@ export async function getStaticProps() {
     data: {
       query: `
       query getPost {
-        page(id: "home", idType: URI) {
+        page(id: "${params.slug}", idType: URI) {
           id
           pageId
           slug
@@ -28,27 +27,50 @@ export async function getStaticProps() {
     }
   })
 
-  //debugger
-
   return {
     props: {
-      post: response.data.data.page,
+      post: page.data.data.page,
     },
   }
 
 }
 
+export async function getStaticPaths() {
+  const posts = await axios({
+    url: 'http://base.localhost:8080/graphql',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: {
+      query: `
+      query getPost {
+        pages {
+          nodes {
+            id
+            slug
+          }
+        }
+      }            
+      `
+    }
+  })
 
+  const paths = posts.data.data.pages.nodes.map((post) => ({
+    params: { slug: post.slug },
+  }))
 
-function Page(props, { post }) {
-  //console.log(props)
-  //debugger
+  return { paths, fallback: false }
+}
+
+function Page(props) {
+  // debugger
 
   return (
     <>
-      <Meta title="Home" />
+      <Meta title={props.post.title} />
 
-      <Header menu={props.menu} currentPage={props.post.slug} />
+      <Header menu={props.menu} currentPage={props.post.slug} className="" />
 
       <div className={"page " + props.post.slug}>
 

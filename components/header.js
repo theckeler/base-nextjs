@@ -1,48 +1,69 @@
 import Link from 'next/link'
-import Nav from './nav'
 import Image from 'next/image'
 
-const handleClick = (e) => {
+function handleClick(e) {
     document.getElementById("header").classList.toggle(styles.active);
     document.getElementById("hamburger").classList.toggle(styles.active);
 }
 
-const Header = (props) => (
-    <header id="header" className="header">
-        <div className="wrapper">
-            <div className="logo">
-                {props.currentPage == 'home' ? (
-                    <Image
-                        src="/_images/logo.svg"
-                        height={80}
-                        width={300}
-                        alt="Consume Design"
-                        layout="responsive"
-                    />) : (
-                    <Link href="/">
-                        <a>
+function Header(props) {
+    return (
+        <>
+            <header id="header" className="header">
+                <div className="wrapper">
+                    <div className="logo">
+                        {props.currentPage == 'home' ? (
                             <Image
                                 src="/_images/logo.svg"
                                 height={80}
                                 width={300}
                                 alt="Consume Design"
                                 layout="responsive"
-                            />
-                        </a>
-                    </Link>
-                )}
+                            />) : (
+                            <Link href="/">
+                                <a>
+                                    <Image
+                                        src="/_images/logo.svg"
+                                        height={80}
+                                        width={300}
+                                        alt="Consume Design"
+                                        layout="responsive"
+                                    />
+                                </a>
+                            </Link>
+                        )}
 
-            </div>
+                    </div>
 
-            <Nav currentPage={props.currentPage} />
+                    <nav className="navigation" role="navigation" aria-label="Main">
+                        <ul>
+                            {
+                                props.menu[1].menuItems.nodes.map(menuItem => {
+                                    return (
+                                        <li key={menuItem.id}>
+                                            {props.currentPage == menuItem.pageInfo.page.slug ? (
+                                                <span>{menuItem.label}</span>
+                                            ) : (
+                                                <Link href={menuItem.path}>
+                                                    <a>{menuItem.label}</a>
+                                                </Link>
+                                            )}
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </nav>
 
-            <ul id="hamburger" className="hamburger" onClick={handleClick}>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-    </header >
-)
+                    <ul id="hamburger" className="hamburger" onClick={handleClick}>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </header >
+        </>
+    )
+}
 
 export default Header

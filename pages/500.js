@@ -19,7 +19,7 @@ function About(props) {
         <>
             <Meta title="500 - Internal Server Error " />
 
-            <Header currentPage="about" />
+            <Header menu={props.menu} currentPage={props.post.slug} className="" />
 
             <section className="section">
                 <h1 className="title">500 - Internal Server Error </h1>
@@ -30,7 +30,7 @@ function About(props) {
 
             </section>
 
-            <Footer currentPage="about"></Footer>
+            <Footer menu={props.menu} currentPage={props.post.slug}></Footer>
         </>
     )
 }
