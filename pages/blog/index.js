@@ -16,14 +16,27 @@ export async function getStaticProps() {
     data: {
       query: `
       query getPost {
-        page(id: "home", idType: URI) {
-          id
-          pageId
-          slug
-          title
-          content
+        posts(where: {status: PUBLISH}) {
+          nodes {
+            slug
+            guid
+            dateGmt
+            excerpt
+            title
+            id
+            featuredImage {
+              node {
+                mediaDetails {
+                  file
+                  height
+                  width
+                }
+              }
+            }
+            postId
+          }
         }
-      }  
+      }      
       `
     }
   })
@@ -32,7 +45,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      post: response.data.data.page,
+      posts: response.data.data.posts,
     },
   }
 
@@ -41,7 +54,6 @@ export async function getStaticProps() {
 
 
 function Page(props, { post }) {
-  //console.log(props)
   //debugger
 
   return (
@@ -50,16 +62,40 @@ function Page(props, { post }) {
 
       <Header menu={props.menu} currentPage="blog" />
 
-      <div className={"page " + props.post.slug}>
-
+      <section className="page index">
         <div className="wrapper">
-          <section>
-            <h1 className="title">Blog</h1>
 
-          </section>
+          <ul className="rows">
+            <li className="row row-1">
+              <h1>Blog</h1>
+              <ul className="posts">
+                {
+                  props.posts.nodes.map(post => {
+                    console.log(post)
+                    const date = new Date(post.dateGmt)
+
+                    return (
+                      <li key={post.id} className="post">
+                        <a href={"/blog/" + post.slug + "/"}>
+                          <date>{date.toDateString()}</date>
+                          <strong>{post.title}</strong>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: post.excerpt
+                            }}></div>
+                          <span>Read More ›</span>
+                        </a>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </li>
+            <li className="row row-2 widgets">
+            </li>
+          </ul>
         </div>
-
-      </div>
+      </section>
 
       <Footer menu={props.menu} currentPage="blog"></Footer>
     </>
