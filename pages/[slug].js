@@ -26,34 +26,6 @@ export async function getStaticProps({ params }) {
     }
   })
 
-  /*
-    const posts = await axios({
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: {
-        query: `
-        query getPost {
-          pages {
-            nodes {
-              id
-              slug
-              isPostsPage
-              isFrontPage
-            }
-          }
-        }                  
-        `
-      }
-    })
-  
-    var removeMe = posts.data.data.pages.nodes
-    var removeMe = removeMe.filter(remove => remove.isPostsPage != true)
-    var removeMe = removeMe.filter(remove => remove.isFrontPage != true)
-  
-    debugger
-  */
   return {
     props: {
       post: page.data.data.page,

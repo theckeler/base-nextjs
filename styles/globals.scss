@@ -241,11 +241,17 @@ ul[class],
           margin-right: 0;
         }
 
-        a {
+        a,
+        span {
           display: block;
           padding: 6px 20px;
           color: #000;
           text-decoration: none;
+        }
+
+        span {
+          cursor: default;
+          background: rgba(#000, 0.2);
         }
 
         .sub-nav {

@@ -241,11 +241,16 @@ ul[class],
 .header nav > ul > li:last-of-type {
   margin-right: 0;
 }
-.header nav > ul > li a {
+.header nav > ul > li a,
+.header nav > ul > li span {
   display: block;
   padding: 6px 20px;
   color: #000;
   text-decoration: none;
+}
+.header nav > ul > li span {
+  cursor: default;
+  background: rgba(0, 0, 0, 0.2);
 }
 .header nav > ul > li .sub-nav {
   display: none;
