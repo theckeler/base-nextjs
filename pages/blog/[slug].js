@@ -71,7 +71,7 @@ function Page(props) {
   if (router.isFallback) {
     return (
       <>
-        <div className="loading">Loading...</div>
+        <div className="loading full-screen">Loading...</div>
       </>
     )
   } else {
