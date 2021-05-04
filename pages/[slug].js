@@ -3,6 +3,7 @@ import Footer from 'components/footer'
 import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 export async function getStaticProps({ params }) {
 
