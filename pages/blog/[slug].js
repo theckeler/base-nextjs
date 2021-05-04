@@ -3,6 +3,7 @@ import Footer from 'components/footer'
 import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 export async function getStaticProps({ params }) {
 
@@ -29,6 +30,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       post: page.data.data.page,
+      revalidate: 1,
     },
   }
 
@@ -64,30 +66,34 @@ export async function getStaticPaths() {
 function Page(props) {
   // debugger
 
-  return (
-    <>
-      <Meta title={props.post.title} />
+  const router = useRouter()
+  if (router.isFallback) {
+    return <div className="loading">Loading...</div>
+  } else {
+    return (
+      <>
+        <Meta title={props.post.title} />
 
-      <Header menu={props.menu} currentPage={props.post.slug} className="" />
+        <Header menu={props.menu} currentPage={props.post.slug} className="" />
 
-      <div className={"page " + props.post.slug}>
+        <div className={"page " + props.post.slug}>
 
-        <div className="wrapper">
-          <section>
-            <h1 className="title">{props.post.title}</h1>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: props.post.content
-              }}></div>
-          </section>
+          <div className="wrapper">
+            <section>
+              <h1 className="title">{props.post.title}</h1>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: props.post.content
+                }}></div>
+            </section>
+          </div>
+
         </div>
 
-      </div>
-
-      <Footer menu={props.menu} currentPage={props.post.slug}></Footer>
-    </>
-  )
-
+        <Footer menu={props.menu} currentPage={props.post.slug}></Footer>
+      </>
+    )
+  }
 }
 
 export default Page
