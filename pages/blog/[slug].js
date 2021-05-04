@@ -4,6 +4,7 @@ import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export async function getStaticProps({ params }) {
 
@@ -68,7 +69,11 @@ function Page(props) {
 
   const router = useRouter()
   if (router.isFallback) {
-    return <div className="loading">Loading...</div>
+    return (
+      <>
+        <div className="loading">Loading...</div>
+      </>
+    )
   } else {
     return (
       <>
@@ -80,7 +85,12 @@ function Page(props) {
 
           <div className="wrapper">
             <section>
-              <h1 className="title">{props.post.title}</h1>
+              <h1 className="title">
+                <Link href="/blog">
+                  <a>Blog</a>
+                </Link>
+                : {props.post.title}
+              </h1>
               <div
                 dangerouslySetInnerHTML={{
                   __html: props.post.content

@@ -18,7 +18,7 @@ function Header(props) {
                                 src="/_images/logo.svg"
                                 height={80}
                                 width={300}
-                                alt="Consume Design"
+                                alt="Logo"
                                 layout="responsive"
                             />) : (
                             <Link href="/">
@@ -27,7 +27,7 @@ function Header(props) {
                                         src="/_images/logo.svg"
                                         height={80}
                                         width={300}
-                                        alt="Consume Design"
+                                        alt="Logo"
                                         layout="responsive"
                                     />
                                 </a>
