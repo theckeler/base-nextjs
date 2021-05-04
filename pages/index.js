@@ -5,8 +5,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 export async function getStaticProps() {
-
-
   const response = await axios({
     method: 'post',
     headers: {
@@ -36,8 +34,6 @@ export async function getStaticProps() {
   }
 
 }
-
-
 
 function Page(props, { post }) {
   //console.log(props)

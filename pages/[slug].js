@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
 
   const page = await axios({
     method: 'post',
