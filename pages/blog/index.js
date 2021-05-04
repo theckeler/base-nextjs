@@ -4,7 +4,7 @@ import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const response = await axios({
     method: 'post',
     headers: {
@@ -47,8 +47,6 @@ export async function getStaticProps() {
   }
 
 }
-
-
 
 function Page(props, { post }) {
   //debugger
