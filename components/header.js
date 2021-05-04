@@ -2,8 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 function handleClick(e) {
-    document.getElementById("header").classList.toggle(styles.active);
-    document.getElementById("hamburger").classList.toggle(styles.active);
+    document.getElementById("navigation").classList.toggle('active');
+    document.getElementById("hamburger").classList.toggle('active');
+    document.getElementById("body").classList.toggle('active');
 }
 
 function Header(props) {
@@ -35,7 +36,7 @@ function Header(props) {
 
                     </div>
 
-                    <nav className="navigation" role="navigation" aria-label="Main">
+                    <nav className="navigation" id="navigation" role="navigation" aria-label="Main">
                         <ul>
                             {
                                 props.menu[1].menuItems.nodes.map(menuItem => {

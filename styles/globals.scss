@@ -384,59 +384,11 @@ section.single {
         transform: translateX(0);
       }
 
-      .nav-main {
-        width: 100%;
-        margin: auto;
+      ul {
         flex-direction: column;
-        margin-top: 0;
-
-        li,
-        li.dropdown-link,
-        li.buttons {
-          width: 100%;
-          display: block;
-          text-align: left;
-
-          a {
-            color: #000;
-            background: transparent;
-            text-align: left;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: 600;
-          }
-
-          .dropdown {
-            display: block;
-            position: relative;
-            top: initial;
-            margin-bottom: 6px;
-            padding: 0;
-            background: transparent;
-            left: initial;
-
-            &:before {
-              content: none;
-            }
-
-            ul {
-              background: transparent;
-              box-shadow: none;
-              padding-left: 0;
-
-              li a {
-                color: #000;
-              }
-            }
-          }
-        }
-
-        >li {
-          >a {
-            padding: 20px;
-          }
-        }
       }
+
+
     }
 
     .hamburger {
