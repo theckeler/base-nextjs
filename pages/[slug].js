@@ -29,6 +29,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       post: page.data.data.page,
+      revalidate: 1,
     },
   }
 
@@ -66,14 +67,21 @@ export async function getStaticPaths() {
   }))
 
 
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 function Page(props) {
   // debugger
 
-  return (
-    <>
+  const router = useRouter()
+  if (router.isFallback) {
+    return (
+      <>
+        <div className="loading">Loading...</div>
+      </>
+    )
+  } else {
+    return (<>
       <Meta title={props.post.title} />
 
       <Header menu={props.menu} currentPage={props.post.slug} className="" />
@@ -94,8 +102,8 @@ function Page(props) {
 
       <Footer menu={props.menu} currentPage={props.post.slug}></Footer>
     </>
-  )
-
+    )
+  }
 }
 
 export default Page
