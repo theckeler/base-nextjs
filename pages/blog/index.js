@@ -68,7 +68,7 @@ function Page(props, { post }) {
               <ul className="posts">
                 {
                   props.posts.nodes.map(post => {
-                    console.log(post)
+                    //console.log(post)
                     const date = new Date(post.dateGmt)
 
                     return (

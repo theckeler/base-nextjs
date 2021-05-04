@@ -26,6 +26,34 @@ export async function getStaticProps({ params }) {
     }
   })
 
+  /*
+    const posts = await axios({
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        query: `
+        query getPost {
+          pages {
+            nodes {
+              id
+              slug
+              isPostsPage
+              isFrontPage
+            }
+          }
+        }                  
+        `
+      }
+    })
+  
+    var removeMe = posts.data.data.pages.nodes
+    var removeMe = removeMe.filter(remove => remove.isPostsPage != true)
+    var removeMe = removeMe.filter(remove => remove.isFrontPage != true)
+  
+    debugger
+  */
   return {
     props: {
       post: page.data.data.page,
@@ -47,16 +75,24 @@ export async function getStaticPaths() {
           nodes {
             id
             slug
+            isPostsPage
+            isFrontPage
           }
         }
-      }            
+      }                  
       `
     }
   })
 
-  const paths = posts.data.data.pages.nodes.map((post) => ({
+  var finalPaths
+  var finalPaths = posts.data.data.pages.nodes
+  var finalPaths = finalPaths.filter(remove => remove.isPostsPage != true)
+  var finalPaths = finalPaths.filter(remove => remove.isFrontPage != true)
+
+  const paths = finalPaths.map((post) => ({
     params: { slug: post.slug },
   }))
+
 
   return { paths, fallback: false }
 }
