@@ -1,9 +1,9 @@
 import '../styles/globals.css'
 import axios from 'axios'
+axios.defaults.baseURL = 'http://base-wordpress.consumedesign.com/graphql';
 
 MyApp.getInitialProps = async (ctx) => {
   const menu = await axios({
-    url: 'http://base.localhost:8080/graphql',
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

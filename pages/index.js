@@ -8,7 +8,6 @@ export async function getStaticProps() {
 
 
   const response = await axios({
-    url: 'http://base.localhost:8080/graphql',
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

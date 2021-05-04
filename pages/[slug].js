@@ -7,7 +7,6 @@ import axios from 'axios'
 export async function getStaticProps({ params }) {
 
   const page = await axios({
-    url: 'http://base.localhost:8080/graphql',
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -37,7 +36,6 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const posts = await axios({
-    url: 'http://base.localhost:8080/graphql',
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
