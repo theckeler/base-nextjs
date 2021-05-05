@@ -138,6 +138,10 @@ a:visited, a:active {
 .page p:last-of-type {
   margin-bottom: 0;
 }
+.page img {
+  max-width: 100%;
+  height: auto;
+}
 
 .social {
   display: -webkit-box;
