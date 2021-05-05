@@ -1,35 +1,21 @@
-import Header from 'components/header'
-import Footer from 'components/footer'
-import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { getPost } from 'components/getPost'
+import { getMenus } from 'components/getMenus'
+import Page from 'components/page'
 
 export async function getStaticProps({ params }) {
 
-  const page = await axios({
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: {
-      query: `
-      query getPost {
-        page(id: "${params.slug}", idType: URI) {
-          id
-          pageId
-          slug
-          title
-          content
-        }
-      }  
-      `
-    }
-  })
+  const page = await getPost(params.slug)
+  const menu = await getMenus()
+
+  //debugger
 
   return {
     props: {
       post: page.data.data.page,
+      menus: menu.menu,
     },
     revalidate: 1,
   }
@@ -68,43 +54,16 @@ export async function getStaticPaths() {
   }))
 
 
-  return { paths, fallback: true }
+  return { paths, fallback: 'blocking' }
 }
 
-function Page(props) {
+function slugPage(props) {
   // debugger
-
-  const router = useRouter()
-  if (router.isFallback) {
-    return (
-      <>
-        <div className="loading full-screen">Loading...</div>
-      </>
-    )
-  } else {
-    return (<>
-      <Meta title={props.post.title} />
-
-      <Header menu={props.menu} currentPage={props.post.slug} className="" />
-
-      <div className={"page " + props.post.slug}>
-
-        <div className="wrapper">
-          <section>
-            <h1 className="title">{props.post.title}</h1>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: props.post.content
-              }}></div>
-          </section>
-        </div>
-
-      </div>
-
-      <Footer menu={props.menu} currentPage={props.post.slug}></Footer>
+  return (
+    <>
+      <Page {...props} />
     </>
-    )
-  }
+  )
 }
 
-export default Page
+export default slugPage

@@ -39,7 +39,7 @@ function Header(props) {
                     <nav className="navigation" id="navigation" role="navigation" aria-label="Main">
                         <ul>
                             {
-                                props.menu[1].menuItems.nodes.map(menuItem => {
+                                props.menus[1].menuItems.nodes.map(menuItem => {
                                     return (
                                         <li key={menuItem.id}>
                                             {props.currentPage == menuItem.pageInfo.page.slug ? (

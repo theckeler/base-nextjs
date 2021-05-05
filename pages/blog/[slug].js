@@ -3,34 +3,19 @@ import Footer from 'components/footer'
 import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { getPost } from 'components/getPost'
+import { getMenus } from 'components/getMenus'
 
 export async function getStaticProps({ params }) {
-
-  const page = await axios({
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: {
-      query: `
-      query getPost {
-        page(id: "${params.slug}", idType: URI) {
-          id
-          pageId
-          slug
-          title
-          content
-        }
-      }  
-      `
-    }
-  })
+  const page = await getPost(params.slug)
+  const menu = await getMenus()
 
   return {
     props: {
       post: page.data.data.page,
+      menus: menu.menu,
     },
     revalidate: 1,
   }
@@ -79,7 +64,7 @@ function Page(props) {
       <>
         <Meta title={props.post.title} />
 
-        <Header menu={props.menu} currentPage={props.post.slug} className="" />
+        <Header menus={props.menus} currentPage={props.post.slug} className="" />
 
         <div className={"page " + props.post.slug}>
 
@@ -100,7 +85,7 @@ function Page(props) {
 
         </div>
 
-        <Footer menu={props.menu} currentPage={props.post.slug}></Footer>
+        <Footer menus={props.menus} currentPage={props.post.slug}></Footer>
       </>
     )
   }

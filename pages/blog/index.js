@@ -3,8 +3,10 @@ import Footer from 'components/footer'
 import Meta from 'components/meta'
 import React, { Component } from 'react'
 import axios from 'axios'
+import { getMenus } from 'components/getMenus'
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
+  const menu = await getMenus()
   const response = await axios({
     method: 'post',
     headers: {
@@ -43,7 +45,9 @@ export async function getServerSideProps() {
   return {
     props: {
       posts: response.data.data.posts,
+      menus: menu.menu,
     },
+    revalidate: 1,
   }
 
 }
@@ -55,7 +59,7 @@ function Page(props, { post }) {
     <>
       <Meta title="Blog" />
 
-      <Header menu={props.menu} currentPage="blog" />
+      <Header menus={props.menus} currentPage="blog" />
 
       <section className="page index">
         <div className="wrapper">
@@ -92,7 +96,7 @@ function Page(props, { post }) {
         </div>
       </section>
 
-      <Footer menu={props.menu} currentPage="blog"></Footer>
+      <Footer menus={props.menus} currentPage="blog"></Footer>
     </>
   )
 

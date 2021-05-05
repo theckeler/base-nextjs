@@ -46,7 +46,7 @@ function Footer(props) {
                     <nav className="nav">
                         <ul id="menu-footer-1" className="links">
                             {
-                                props.menu[0].menuItems.nodes.map(menuItem => {
+                                props.menus[0].menuItems.nodes.map(menuItem => {
                                     return (
                                         <li key={menuItem.id}>
                                             {props.currentPage == menuItem.pageInfo.page.slug ? (
