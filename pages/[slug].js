@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 import { getPost } from 'components/getPost'
 import { getMenus } from 'components/getMenus'
 import Page from 'components/page'

@@ -46,7 +46,7 @@ function Header(props) {
                                                 <span>{menuItem.label}</span>
                                             ) : (
                                                 <Link href={menuItem.path}>
-                                                    <a>{menuItem.label}</a>
+                                                    <a onClick={handleClick}>{menuItem.label}</a>
                                                 </Link>
                                             )}
                                         </li>

@@ -494,7 +494,11 @@ section.single {
 
 
 @media only screen and (max-width: $site-max-width),
-(max-device-wdith: $site-max-width) {}
+(max-device-wdith: $site-max-width) {
+  .posts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 @media (max-width: 1024px) {
   .header {
@@ -533,6 +537,16 @@ section.single {
       margin-right: 10px;
     }
   }
+
+  .widgets {
+    display: none;
+  }
+
+  section.index .rows .row-1,
+  section.single .rows .row-1 {
+    width: 100%;
+    padding-right: 0;
+  }
 }
 
 @media only screen and (hover: hover) and (min-width: 1024px) {
@@ -549,7 +563,11 @@ section.single {
   }
 }
 
-@media only screen and (max-width: 768px) {}
+@media only screen and (max-width: 768px) {
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media only screen and (max-width: 420px) {}
 

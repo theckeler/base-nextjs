@@ -480,6 +480,11 @@ section.single .rows .row-2 {
 }
 
 /* START BUILD */
+@media only screen and (max-width: 1400px), (max-device-wdith: 1400px) {
+  .posts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media (max-width: 1024px) {
   .header {
     -webkit-transition: all 0.2s ease-in-out;
@@ -519,6 +524,16 @@ section.single .rows .row-2 {
     display: flex;
     margin-right: 10px;
   }
+
+  .widgets {
+    display: none;
+  }
+
+  section.index .rows .row-1,
+section.single .rows .row-1 {
+    width: 100%;
+    padding-right: 0;
+  }
 }
 @media only screen and (hover: hover) and (min-width: 1024px) {
   .header nav > ul > li a,
@@ -531,5 +546,10 @@ section.single .rows .row-2 {
     cursor: pointer;
     background: #333;
     color: #fff;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .posts {
+    grid-template-columns: 1fr;
   }
 }
