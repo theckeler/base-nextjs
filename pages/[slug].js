@@ -48,6 +48,10 @@ export async function getStaticPaths() {
   var finalPaths = posts.data.data.pages.nodes
   var finalPaths = finalPaths.filter(remove => remove.isPostsPage != true)
   var finalPaths = finalPaths.filter(remove => remove.isFrontPage != true)
+  var finalPaths = finalPaths.filter(remove => remove.slug == "shop")
+  var finalPaths = finalPaths.filter(remove => remove.slug == "my-account")
+  var finalPaths = finalPaths.filter(remove => remove.slug == "checkout")
+  var finalPaths = finalPaths.filter(remove => remove.slug == "cart")
 
   const paths = finalPaths.map((post) => ({
     params: { slug: post.slug },
