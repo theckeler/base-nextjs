@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 export async function getPost(slug) {
-    const page = axios({
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: {
-            query: `
+  const page = axios({
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: {
+      query: `
           query getPost {
             page(id: "${slug}", idType: URI) {
               id
@@ -18,8 +18,8 @@ export async function getPost(slug) {
             }
           }  
           `
-        }
-    })
+    }
+  })
 
-    return page
+  return page
 }
